@@ -8,6 +8,9 @@
 
 #import "KMSearchDisplayController.h"
 
+#define UI_SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
+#define UI_SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
+
 @interface KMSearchDisplayController ()
 
 @property (nonatomic, strong) UIView *backgroundView;
@@ -38,10 +41,10 @@
         if (self.searchBar.frame.size.width == 0) {
             
             CGPoint origin = self.searchBar.frame.origin;
-            self.searchBar.frame = CGRectMake(origin.x, origin.y, XKAppWidth, 44.f);
+            self.searchBar.frame = CGRectMake(origin.x, origin.y, UI_SCREEN_WIDTH, 44.f);
         }
         
-        self.backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, XKAppWidth, XKAppHeight - 64)];
+        self.backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, UI_SCREEN_WIDTH, UI_SCREEN_HEIGHT - 64)];
         self.backgroundView.backgroundColor = [UIColor clearColor];
         
         self.backgroundContentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.backgroundView.frame.size.width, self.backgroundView.frame.size.height)];
@@ -54,15 +57,15 @@
         
         UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideSearchResultView)];
         
-        if (IOS_8_OR_LATER) {
+        if ([UIDevice currentDevice].systemVersion.floatValue >= 8.0) {
             UIVisualEffectView *blurView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleLight]];
-            blurView.frame = CGRectMake(0, 0, XKAppWidth, self.backgroundView.height);
+            blurView.frame = CGRectMake(0, 0, UI_SCREEN_WIDTH, self.backgroundView.frame.size.height);
             [self.backgroundView addSubview:blurView];
             
             [blurView addGestureRecognizer:gesture];
             
         } else {
-            UIView *transationView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, XKAppWidth, self.backgroundView.height)];
+            UIView *transationView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, UI_SCREEN_WIDTH, self.backgroundView.frame.size.height)];
             transationView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.8];
             [transationView addGestureRecognizer:gesture];
             
