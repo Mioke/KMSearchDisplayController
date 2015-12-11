@@ -40,4 +40,4 @@ Editable backView when searching, blur and transparent background. Beeeeeeautifu
   More infomation to see in demo, any good idea or bug you can open an issue.
   
 # LICENCE
-  All the source code is publish under the MIT Licence. See the LICENCE file for details.
+  All the source code is published under the MIT Licence. See the LICENCE file for details.
